@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Image;
-use Session;
-class UploadController extends Controller
+use App\Product;
+
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,9 @@ class UploadController extends Controller
      */
     public function index()
     {
-        $data = Image::all();
-        return view('upload.list', compact('data'));
+        $products = Product::all();
+        return view('admin.product.list',compact('products'));
+
     }
 
     /**
@@ -25,7 +26,7 @@ class UploadController extends Controller
      */
     public function create()
     {
-        return view('upload.create');
+        return view('admin.category.create');
     }
 
     /**
@@ -36,23 +37,7 @@ class UploadController extends Controller
      */
     public function store(Request $request)
     {
-        if( $request->hasFile('image')){
-            $file_name = $request->file('image')->getClientOriginalName();
-            $file_size = $request->file('image')->getSize();
-            $file_url = $request->file('image')->getRealPath();
-            $file_type = $request->file('image')->getMimeType();
-            $filePath = public_path('/uploads/');
-            $request->file('image')->move($filePath, $file_name);
-            $item = new Image();
-            $item->name = $file_name;
-            $item->size = $file_size;
-            $item->url = $file_url;
-            $item->type = $file_type;
-            $item->product_id = 5;
-            $item->save();
-            Session::flash('success','Upload Image Successfully !!');
-        }
-        return redirect('upload');
+        //
     }
 
     /**

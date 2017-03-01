@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Image;
+use App\Order;
+use Cart;
 use Session;
-class UploadController extends Controller
+use App\OrderDetail;
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +16,7 @@ class UploadController extends Controller
      */
     public function index()
     {
-        $data = Image::all();
-        return view('upload.list', compact('data'));
+        //
     }
 
     /**
@@ -25,7 +26,7 @@ class UploadController extends Controller
      */
     public function create()
     {
-        return view('upload.create');
+        //
     }
 
     /**
@@ -36,23 +37,35 @@ class UploadController extends Controller
      */
     public function store(Request $request)
     {
-        if( $request->hasFile('image')){
-            $file_name = $request->file('image')->getClientOriginalName();
-            $file_size = $request->file('image')->getSize();
-            $file_url = $request->file('image')->getRealPath();
-            $file_type = $request->file('image')->getMimeType();
-            $filePath = public_path('/uploads/');
-            $request->file('image')->move($filePath, $file_name);
-            $item = new Image();
-            $item->name = $file_name;
-            $item->size = $file_size;
-            $item->url = $file_url;
-            $item->type = $file_type;
-            $item->product_id = 5;
-            $item->save();
-            Session::flash('success','Upload Image Successfully !!');
+        //Hóa đơn
+        $order = new Order();
+        $order->user_id =1;
+        $order->receiver_name = $request->receiver_name;
+        $order->receiver_date = $request->receiver_date;
+        $order->receiver_phone_number = $request->receiver_phone_number;
+        $order->receiver_email = $request->receiver_email;
+        $order->receiver_address = $request->receiver_address;
+        $order->total_amount = Cart::total();
+        $order->status =1;
+        $order->save();
+        //Chi tiết hóa đơn
+        foreach (Cart::all() as $item){
+            $order_detail = new OrderDetail();
+            $order_detail->product_id =$item->id;
+            $order_detail->order_id = $order->id;
+            $order_detail->price =$item->price;
+            $order_detail->quantity =$item->qty ;
+            $order_detail->discount=$item->discount ;
+            $order_detail->tax= 0;
+            $order_detail->amount = $item->total;
+            $order_detail->save();
         }
-        return redirect('upload');
+        //Xóa giỏ hàng
+        Cart::destroy();
+        Session::flash('success',"Thực hiện mua hàng thành công !!!");
+
+        return redirect('cart');
+
     }
 
     /**
