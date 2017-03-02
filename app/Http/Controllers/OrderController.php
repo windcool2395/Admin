@@ -14,9 +14,15 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
+        $order_id = $request->get('order_id');
+        if( isset($order_id)){
+            $order = Order::where('id',$order_id)->get();
+            $order_detail = OrderDetail::where('order_id',$order_id)->get();
+        }
+        return view('order.list', compact('order','order_detail'));
     }
 
     /**
