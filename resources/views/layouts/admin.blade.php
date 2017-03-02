@@ -290,7 +290,7 @@
                     <a href="{{url('admin/category')}}"><i class="fa fa-flask fa-fw"></i>Category Manager</a>
                 </li>
                 <li>
-                    <a href="tables.html"><i class="fa fa-table fa-fw"></i>Tables</a>
+                    <a href="{{url('upload')}}"><i class="fa fa-table fa-fw"></i>Upload Images</a>
                 </li>
                 <li>
                     <a href="forms.html"><i class="fa fa-edit fa-fw"></i>Forms</a>

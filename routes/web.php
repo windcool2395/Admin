@@ -18,3 +18,7 @@ Route::get('admin', function () {
     return view('admin.dashboard');
 });
 Route::resource('admin/category','Admin\\CategoryController');
+
+Route::get('upload','UploadController@index');
+Route::get('upload/create','UploadController@create');
+Route::post('upload','UploadController@store');
