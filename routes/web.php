@@ -19,6 +19,13 @@ Route::get('admin', function () {
 });
 Route::resource('admin/category','Admin\\CategoryController');
 
+
+Route::resource('admin/product','ProductController');
+
+
 Route::get('upload','UploadController@index');
 Route::get('upload/create','UploadController@create');
 Route::post('upload','UploadController@store');
+
+Route::resource('cart','CartController');
+Route::resource('order','OrderController');

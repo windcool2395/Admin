@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Image;
+use Cart;
 use Session;
-class UploadController extends Controller
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class UploadController extends Controller
      */
     public function index()
     {
-        $data = Image::all();
-        return view('upload.list', compact('data'));
+        return view('cart.list');
     }
 
     /**
@@ -25,7 +24,7 @@ class UploadController extends Controller
      */
     public function create()
     {
-        return view('upload.create');
+        //
     }
 
     /**
@@ -36,23 +35,16 @@ class UploadController extends Controller
      */
     public function store(Request $request)
     {
-        if( $request->hasFile('image')){
-            $file_name = $request->file('image')->getClientOriginalName();
-            $file_size = $request->file('image')->getSize();
-            $file_url = $request->file('image')->getRealPath();
-            $file_type = $request->file('image')->getMimeType();
-            $filePath = public_path('/uploads/');
-            $request->file('image')->move($filePath, $file_name);
-            $item = new Image();
-            $item->name = $file_name;
-            $item->size = $file_size;
-            $item->url = $file_url;
-            $item->type = $file_type;
-            $item->product_id = 5;
-            $item->save();
-            Session::flash('success','Upload Image Successfully !!');
-        }
-        return redirect('upload');
+        $id= $request->id;
+        $name = $request->title;
+        $thumbnail = $request->thumbnail;
+        $price = $request->price;
+        $sl = $request->sl;
+        $discount = $request->discount;
+        Cart::add($id, $name, $sl,$price,['discount'=>$discount,'thumbnail' => $thumbnail]);
+        Session::flash('success',"Thêm sản phẩm vào giỏ hàng thành công !!!");
+
+        return redirect('admin/product');
     }
 
     /**
@@ -86,7 +78,20 @@ class UploadController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if($request->qty >=1){
+            foreach (Cart::all() as $item){
+                if($item->id == $id){
+                    Cart::update($item-> __raw_id, ['qty'=> $request->qty]);
+                    break;
+                }
+            }
+            Session::flash('success',"Cập nhật số lượng giỏ hàng thành công !!!");
+        }
+        else{
+            Session::flash('success',"Số lượng phải >= 1 !!!");
+        }
+
+        return redirect('cart');
     }
 
     /**
@@ -97,6 +102,14 @@ class UploadController extends Controller
      */
     public function destroy($id)
     {
-        //
+        foreach (Cart::all() as $item){
+            if($item->id == $id){
+                Cart::remove($item-> __raw_id);
+                break;
+            }
+
+        }
+        Session::flash('success',"Cập nhật giỏ hàng thành công !!!");
+        return redirect('cart');
     }
 }

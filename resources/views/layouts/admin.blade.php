@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootsrtap Free Admin Template - SIMINTA | Admin Dashboad Template</title>
+    <title> Book Online </title>
     <!-- Core CSS - Include with every page -->
     <link href="{{url('plugins/bootstrap/bootstrap.css')}}"rel="stylesheet"/>
     <link href="{{url('font-awesome/css/font-awesome.css')}}" rel="stylesheet" />
@@ -293,7 +293,7 @@
                     <a href="{{url('upload')}}"><i class="fa fa-table fa-fw"></i>Upload Images</a>
                 </li>
                 <li>
-                    <a href="forms.html"><i class="fa fa-edit fa-fw"></i>Forms</a>
+                    <a href="{{url('admin/product')}}"><i class="fa fa-edit fa-fw"></i>Product Manager</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-wrench fa-fw"></i>UI Elements<span class="fa arrow"></span></a>
