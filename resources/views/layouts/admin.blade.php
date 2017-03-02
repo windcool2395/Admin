@@ -296,6 +296,9 @@
                     <a href="{{url('admin/product')}}"><i class="fa fa-edit fa-fw"></i>Product Manager</a>
                 </li>
                 <li>
+                    <a href="{{url('cart')}}"><i class="fa fa-edit fa-fw"></i>Cart Manager</a>
+                </li>
+                <li>
                     <a href="#"><i class="fa fa-wrench fa-fw"></i>UI Elements<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>

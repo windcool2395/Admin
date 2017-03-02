@@ -8,6 +8,15 @@
                 <h1 class="page-header">Thông tin giỏ hàng</h1>
                 <li class="btn btn-default"> <a href="{{ url('cart') }}">Chi tiết giỏ hàng ({{Cart::countRows()}})</a> </li>
             </div>
+            <div  style="float: right;">
+                {{Form::open([
+                           'method' => 'GET',
+                           'url' => ['order']
+                ]) }}
+                    <input type="text" value="" class="form-control" name="order_id" placeholder="Nhập mã hóa đơn..." style="width: 200px;" required="true"/>
+                    <input class="btn btn-success red " type="submit" value="Xem hóa đơn" style="float: right;"/>
+                {{Form::close()}}
+            </div>
             <!--End Page Header -->
         </div>
         @if(Session::has('success'))
@@ -60,11 +69,9 @@
                                                                'method' => 'PATCH',
                                                                'url' => ['cart',$item->id]
                                                         ]) }}
-                                                        <input type="text" style="width: 80px;" name="qty" value="{{$item->qty}}"/>
-                                                        <input type="submit" class="btn btn-default" value="Cập nhật"/>
-
+                                                            <input type="text" style="width: 80px;" name="qty" value="{{$item->qty}}"/>
+                                                            <input type="submit" class="btn btn-default" value="Cập nhật"/>
                                                         {{Form::close()}}
-
                                                     </td>
                                                     <td>{{number_format($item->discount)}}%</td>
                                                     <td><img src="http://localhost/BT/DMDatabase/public/uploads/{{$item->thumbnail}}" alt="" width="50px"/></td>
@@ -74,16 +81,15 @@
                                                                   'method' => 'DELETE',
                                                                   'url' => ['cart', $item->id]
                                                            ]) }}
-                                                        <button type="submit" onclick="return confirm('Bạn có chắc chắn muốn xóa ???');" class="btn btn-success blue">Delete</button>
-
+                                                            <button type="submit" onclick="return confirm('Bạn có chắc chắn muốn xóa ???');" class="btn btn-success blue">Delete</button>
                                                         {{Form::close()}}
                                                     </td>
                                                 </tr>
                                             @endforeach
-                                                <tr>
-                                                    <td colspan="8"> Total amount: {{ number_format(Cart::total()) }}VND</td>
-                                                </tr>
-                                                </tbody>
+                                            <tr>
+                                                <td colspan="8"> Total amount: {{ number_format(Cart::total()) }}VND</td>
+                                            </tr>
+                                        </tbody>
                                     </table>
                                 </div>
 
@@ -93,17 +99,15 @@
                         <div class="from-group">
                             <p class="btn btn-success red">Thanh Toán...</p>
                             {{Form::open([
-                                                                     'method' => 'POST',
-                                                                     'url' => ['order']
-                                                              ]) }}
-                                <label>Tên người nhận: </label> <input type="text" name="receiver_name"/><br/>
-                                <label>Ngày nhận: </label> <input type="datetime" name="receiver_date"/><br/>
-                                <label>SĐT người nhận: </label> <input type="text" name="receiver_phone_number"/><br/>
-                                <label>Email người nhận: </label> <input type="text" name="receiver_email"/><br/>
-                                <label>Địa chỉ người nhận: </label> <input type="text" name="receiver_address"/><br/>
-
+                                         'method' => 'POST',
+                                         'url' => ['order']
+                            ]) }}
+                                <label>Tên người nhận: </label> <input type="text" name="receiver_name" required="true"/><br/>
+                                <label>Ngày nhận: </label> <input type="datetime" name="receiver_date" required="true"/><br/>
+                                <label>SĐT người nhận: </label> <input type="text" name="receiver_phone_number" required="true"/><br/>
+                                <label>Email người nhận: </label> <input type="text" name="receiver_email" required="true"/><br/>
+                                <label>Địa chỉ người nhận: </label> <input type="text" name="receiver_address" required="true"/><br/>
                                 <input type="submit" class="btn btn-success blue" value="Đặt hàng..."/>
-
                             {{Form::close()}}
                         </div>
                         <!-- /.row -->
