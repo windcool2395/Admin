@@ -13,6 +13,9 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
+                <div class="from-group">
+                    <a href="{{url('admin/category')}}" class="btn btn-default"> Back...</a>
+                </div>
                 <!-- Form Elements -->
                 <div class="panel panel-default">
                     <div class="panel-heading">

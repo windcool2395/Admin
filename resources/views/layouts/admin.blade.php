@@ -10,8 +10,9 @@
     <link href="{{url('plugins/pace/pace-theme-big-counter.css')}}" rel="stylesheet" />
     <link href="{{url('css/style.css')}}" rel="stylesheet" />
     <link href="{{url('css/main-style.css')}}" rel="stylesheet" />
+    <link href="{{url('css/cart.css')}}" rel="stylesheet" />
     <!-- Page-Level CSS -->
-    <link href="{{url('plugins/morris/morris-0.4.3.min.css')}}" rel="stylesheet" />
+
 </head>
 <body>
 <!--  wrapper -->
@@ -297,6 +298,9 @@
                 </li>
                 <li>
                     <a href="{{url('cart')}}"><i class="fa fa-edit fa-fw"></i>Cart Manager</a>
+                </li>
+                <li>
+                    <a href="{{url('product')}}"><i class="fa fa-edit fa-fw"></i>Shopping</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-wrench fa-fw"></i>UI Elements<span class="fa arrow"></span></a>

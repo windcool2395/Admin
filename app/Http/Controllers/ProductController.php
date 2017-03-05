@@ -15,8 +15,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('admin.product.list',compact('products'));
-
+        return view('product.list',compact('products'));
     }
 
     /**
@@ -26,7 +25,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        //
     }
 
     /**
@@ -48,7 +47,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        //        $pro = Product::findOrFail($id);
+        //        return view('product.view', compact('pro','cate'));
     }
 
     /**

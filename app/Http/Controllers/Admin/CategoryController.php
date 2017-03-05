@@ -109,7 +109,7 @@ class CategoryController extends Controller
         //$row = Category::where('id', $id)-> first();
         if( $row){
             $row->delete();
-            Session::flash('success', 'Deleted "'.$row->title .'"" successfully !' );
+            Session::flash('success', 'Deleted "'.$row->title .'" successfully !' );
         }
 
         return redirect('admin/category');
