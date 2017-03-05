@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
     <div id="page-wrapper">
@@ -33,7 +33,7 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="from-group">
-                    <a href="{{url('admin/product')}}" class="btn btn-default"> Back...</a>
+                    <a href="{{url('product')}}" class="btn btn-default"> Back...</a>
                 </div>
                 <!--Bảng Category -->
                 <div class="panel panel-primary">

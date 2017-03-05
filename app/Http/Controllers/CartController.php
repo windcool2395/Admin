@@ -44,7 +44,7 @@ class CartController extends Controller
         Cart::add($id, $name, $sl,$price,['discount'=>$discount,'thumbnail' => $thumbnail]);
         Session::flash('success',"Thêm sản phẩm vào giỏ hàng thành công !!!");
 
-        return redirect('admin/product');
+        return redirect('product');
     }
 
     /**

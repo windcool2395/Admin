@@ -11,16 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','HomeController@index');
 Route::get('admin', function () {
     return view('admin.dashboard');
 });
+
 Route::resource('admin/category','Admin\\CategoryController');
 
 
-Route::resource('admin/product','ProductController');
+Route::resource('admin/product','Admin\\ProductController');
 
 
 Route::get('upload','UploadController@index');
@@ -28,4 +27,11 @@ Route::get('upload/create','UploadController@create');
 Route::post('upload','UploadController@store');
 
 Route::resource('cart','CartController');
+
 Route::resource('order','OrderController');
+
+Route::resource('product','ProductController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

@@ -13,6 +13,9 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
+                <div class="from-group">
+                    <a href="{{url('admin/category')}}" class="btn btn-default"> Back...</a>
+                </div>
                 <!-- Form Elements -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -24,7 +27,7 @@
                                 {{Form::open(['method' => 'POST','url' => 'admin/category','role' => 'form']) }}
                                     <div class="form-group">
                                         <label>Title</label>
-                                        <input class="form-control" name="title" id="txtTitle">
+                                        <input class="form-control" type="text" name="title" id="txtTitle">
                                         <p class="help-block">Hãy nhập tên thẻ loại sách tại đây!!</p>
                                     </div>
 
